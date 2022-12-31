@@ -30,3 +30,15 @@ services:
       - ./realms/:/opt/keycloak/data/import/
     depends_on:
       - keycloak-mysql
+
+  product-db:
+    image: postgres:14.6-bullseye
+    restart: always
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: productdb
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./productdb/:/var/lib/postgresql/data

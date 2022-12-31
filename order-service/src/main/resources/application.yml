@@ -28,7 +28,7 @@ spring:
           spickandspan-client:
             provider: keycloak
             client-id: spickandspan-client
-            client-secret: MYHFdBhuWGp93easXLtkZ22i8vWIuacu
+            client-secret: EBXPPdhrCFa0ptEpJmFZMH7dsDrD9IXm
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
             scope: openid

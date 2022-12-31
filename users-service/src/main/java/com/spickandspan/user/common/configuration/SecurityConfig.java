@@ -1,4 +1,4 @@
-package com.spickandspan.order.config;
+package com.spickandspan.user.common.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.cors().disable();
+
         http.authorizeRequests(authorize -> authorize
-                        .anyRequest().authenticated())
+                        .antMatchers("/users/api/v1/register").permitAll()
+                        .anyRequest().permitAll()
+                )
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return http.build();
     }

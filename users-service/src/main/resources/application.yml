@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8083
 
 eureka:
   client:
@@ -8,3 +8,44 @@ eureka:
 spring:
   application:
     name: user-service
+  datasource:
+    username: username
+    password: password
+    url: jdbc:postgresql://localhost:5432/productdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            token-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/token
+            authorization-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/auth
+            user-name-attribute: preferred_username
+            user-info-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
+            user-info-authentication-method: header
+        registration:
+          spickandspan-client:
+            provider: keycloak
+            client-id: ${app.config.keycloak.clientId}
+            client-secret: ${app.config.keycloak.client-secret}
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+            scope: openid
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
+app:
+  config:
+    keycloak:
+      url: http://localhost:8180
+      server-url: http://localhost:8180
+      realm: spickandspan
+      clientId: spickandspan-client
+      client-secret: c6Pi13aRJ3XVI5xwyGEo1NHtF4Z7FvSC
+
