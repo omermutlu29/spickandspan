@@ -1,8 +1,7 @@
 package com.spickandspan.user.product.domain.entity;
 
 import com.spickandspan.user.user.domain.entity.UserEntity;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.jboss.resteasy.spi.touri.MappedBy;
 
 import javax.persistence.*;
@@ -13,6 +12,11 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 public class ProductEntity {
+
+    public ProductEntity() {
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,4 +33,6 @@ public class ProductEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+
 }

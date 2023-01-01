@@ -22,6 +22,12 @@ public class KeycloakProperties {
     @Value("${app.config.keycloak.client-secret}")
     private String clientSecret;
 
+    @Value("${app.config.keycloak.username}")
+    private String username;
+
+    @Value("${app.config.keycloak.password}")
+    private String password;
+
     private static Keycloak keycloakInstance = null;
 
     public Keycloak getInstance() {
@@ -32,8 +38,8 @@ public class KeycloakProperties {
                     .grantType(OAuth2Constants.PASSWORD)
                     .clientId(clientId)
                     .clientSecret(clientSecret)
-                    .username("super")
-                    .password("1234")
+                    .username(username)
+                    .password(password)
                     .build();
         }
         return keycloakInstance;

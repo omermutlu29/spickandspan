@@ -3,14 +3,22 @@ package com.spickandspan.user.product.domain.mapper;
 import com.spickandspan.user.product.domain.dto.req.CreateProductRequest;
 import com.spickandspan.user.product.domain.dto.res.ProductResponseDTO;
 import com.spickandspan.user.product.domain.entity.ProductEntity;
+import com.spickandspan.user.user.domain.mapper.UserMapper;
 
 
 public class ProductMapper {
-    private static ProductResponseDTO convertToResponseDTO(ProductEntity productEntity) {
-        return new ProductResponseDTO();
+    public static ProductResponseDTO convertToResponseDTO(ProductEntity productEntity) {
+        return ProductResponseDTO.builder()
+                .name(productEntity.getName())
+                .description(productEntity.getDescription())
+                .price(productEntity.getPrice())
+                .build();
     }
 
-    private static ProductEntity convertDtoToEntity(CreateProductRequest createProductRequest) {
-        return new ProductEntity();
+    public static ProductEntity convertDtoToEntity(CreateProductRequest createProductRequest) {
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setName(createProductRequest.getName());
+        productEntity.setPrice(createProductRequest.getPrice());
+        return productEntity;
     }
 }

@@ -47,5 +47,7 @@ app:
       server-url: http://localhost:8180
       realm: spickandspan
       clientId: spickandspan-client
-      client-secret: c6Pi13aRJ3XVI5xwyGEo1NHtF4Z7FvSC
+      client-secret: OiejW1ucL9PQusdFVZioct4DZzaDVkOI
+      username: super
+      password: 1234
 

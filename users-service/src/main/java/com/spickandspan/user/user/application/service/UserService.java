@@ -1,5 +1,6 @@
 package com.spickandspan.user.user.application.service;
 
+import com.spickandspan.user.common.exception.EntityNotFoundException;
 import com.spickandspan.user.common.exception.GlobalErrorCode;
 import com.spickandspan.user.common.exception.GlobalException;
 import com.spickandspan.user.user.application.exception.UserAlreadyRegisteredException;
@@ -44,6 +45,14 @@ public class UserService {
         userEntity.setKeycloakId(userRepresentation.getId());
         userEntity.setStatus(Status.APPROVED);
         return userRepository.save(userEntity);
+    }
+
+    public UserEntity findById(Long id) {
+        return userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public UserEntity findByKeycloakId(String keycloakId) {
+        return userRepository.findByKeycloakId(keycloakId).orElseThrow(EntityNotFoundException::new);
     }
 
 
