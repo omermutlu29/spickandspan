@@ -1,5 +1,6 @@
 package com.spickandspan.taxservice.entity;
 
+import com.spickandspan.taxservice.event.EventType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,7 @@ public class TaxRecordEntity {
     Long productId;
 
     BigDecimal taxOfProduct;
+
+    EventType eventType;
 
 }

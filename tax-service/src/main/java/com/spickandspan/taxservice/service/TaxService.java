@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaxService {
@@ -35,18 +37,22 @@ public class TaxService {
             this.taxRecordRepository.save(taxRecordEntityMapped);
         }
         if (productEvent.getEventType() == EventType.DELETE) {
-            TaxRecordEntity taxRecordEntity = findByProductId(productEvent.getId());
-            this.taxRecordRepository.delete(taxRecordEntity);
+            System.out.println(productEvent.getEventType() + " " + productEvent.getId());
+            List<TaxRecordEntity> taxRecordEntities = this.taxRecordRepository.findByProductId(productEvent.getId());
+            System.out.println(taxRecordEntities.get(0).getTaxOfProduct());
+            this.taxRecordRepository.deleteAll(taxRecordEntities);
         }
     }
 
     private TaxRecordEntity findByProductId(Long productId) {
         return taxRecordRepository.findItemByProductId(productId).orElseThrow(EntityNotFoundException::new);
     }
+
     private TaxRecordEntity mapProductEventToTaxEntity(ProductEvent productEvent) {
         TaxRecordEntity taxRecordEntity = new TaxRecordEntity();
         taxRecordEntity.setTaxOfProduct(TAX_RATIO.multiply(productEvent.getPrice()));
         taxRecordEntity.setProductId(productEvent.getId());
+        taxRecordEntity.setEventType(productEvent.getEventType());
         return taxRecordEntity;
     }
 }
