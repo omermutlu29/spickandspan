@@ -27,7 +27,7 @@ services:
     ports:
       - "8180:8080"
     volumes:
-      - ./realms/:/opt/keycloak/data/import/
+      - ./docker-volumes/realms/:/opt/keycloak/data/import/
     depends_on:
       - keycloak-mysql
     networks:
@@ -43,7 +43,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./productdb/:/var/lib/postgresql/data
+      - ./docker-volumes/productdb/:/var/lib/postgresql/data
 
 
   zookeeper:
@@ -80,7 +80,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: Omer2015
       MONGO_INITDB_DATABASE: taxes
     volumes:
-      - ./mongo-data:/data/db
+      - ./docker-volumes/mongo-data:/data/db
 
 networks:
   local-bridge:

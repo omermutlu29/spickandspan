@@ -3,7 +3,7 @@ app:
     keycloak:
       url: http://localhost:8180
       realm: spickandspan
-      client-secret: d5qlvDe5qQ7GIUsuEBHnFTeQQz7v08Xq
+      client-secret: K1v2y71BL4Fz6tcMFLrI9NwXGDO8LAm0
       client-id: spickandspan-client
 eureka:
   client:

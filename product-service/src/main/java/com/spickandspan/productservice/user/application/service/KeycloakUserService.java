@@ -34,8 +34,6 @@ public class KeycloakUserService {
         try{
             return keyCloakManager.getInstance().realm(realm).users().search(email).stream().toList();
         }catch (Exception exception){
-            System.out.println(exception.getCause().toString());
-            System.out.println(exception.getMessage().toString());
             throw exception;
         }
     }
