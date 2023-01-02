@@ -42,7 +42,11 @@ public class TaxService {
     }
 
     private TaxRecordEntity findByProductId(Long productId) {
-        return taxRecordRepository.findItemByProductId(productId).orElseThrow(EntityNotFoundException::new);
+        List<TaxRecordEntity> entities =  taxRecordRepository.findByProductId(productId);
+        if (entities.isEmpty() ){
+            throw new EntityNotFoundException();
+        }
+        return entities.get(0);
     }
 
     private TaxRecordEntity mapProductEventToTaxEntity(ProductEvent productEvent) {

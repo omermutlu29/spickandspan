@@ -8,6 +8,7 @@ import com.spickandspan.productservice.product.domain.entity.ProductEntity;
 public class ProductMapper {
     public static ProductResponseDTO convertToResponseDTO(ProductEntity productEntity) {
         return ProductResponseDTO.builder()
+                .id(productEntity.getId())
                 .name(productEntity.getName())
                 .description(productEntity.getDescription())
                 .price(productEntity.getPrice())
