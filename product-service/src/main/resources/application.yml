@@ -1,15 +1,23 @@
-app:
-  config:
-    keycloak:
-      url: http://localhost:8180
-      realm: spickandspan
-      client-secret: d5qlvDe5qQ7GIUsuEBHnFTeQQz7v08Xq
-      client-id: spickandspan-client
+server:
+  port: 8083
+
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: http://user:password@localhost:8761/eureka
 spring:
+  application:
+    name: user-service
+  datasource:
+    username: username
+    password: password
+    url: jdbc:postgresql://localhost:5432/productdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   security:
     oauth2:
       client:
@@ -24,7 +32,7 @@ spring:
         registration:
           spickandspan-client:
             provider: keycloak
-            client-id: ${app.config.keycloak.client-id}
+            client-id: ${app.config.keycloak.clientId}
             client-secret: ${app.config.keycloak.client-secret}
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
@@ -32,14 +40,17 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${app.config.keycloak.url}/realms/${app.config.keycloak.realm}/protocol/openid-connect/certs
-  cloud:
-    gateway:
-      routes:
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/users/**,/products/**
-  application:
-    name: api-gateway
-server:
-  port: 8080
+
+app:
+  config:
+    keycloak:
+      url: http://localhost:8180
+      server-url: http://localhost:8180
+      realm: spickandspan
+      clientId: spickandspan-client
+      client-secret: d5qlvDe5qQ7GIUsuEBHnFTeQQz7v08Xq
+      username: super
+      password: 1234
+
+kafka.address: localhost:29092
+kafka.group-id: testgroupid

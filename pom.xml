@@ -7,9 +7,8 @@
 		<module>eureka-server</module>
 		<module>gateway</module>
 		<module>config-server</module>
-		<module>users-service</module>
-        <module>order-service</module>
-		<module>animal-service</module>
+		<module>product-service</module>
+		<module>tax-service</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -43,7 +42,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
