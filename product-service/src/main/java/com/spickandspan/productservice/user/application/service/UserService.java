@@ -25,6 +25,7 @@ public class UserService {
     private final KeycloakUserService keycloakUserService;
     private final UserRepository userRepository;
 
+
     public UserResponse createUser(CreateUserRequest createUserRequest) {
 
         List<UserRepresentation> isUserExist = keycloakUserService.readUserByEmail(createUserRequest.getEmail());

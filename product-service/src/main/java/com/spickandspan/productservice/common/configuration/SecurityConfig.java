@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] WHITE_LIST=new String[] {"/users/api/v1/register","/products/api/v1/getAll","/products/api/v1/findById/1"};
+    private final String[] WHITE_LIST=new String[] {"/users/api/v1/register","/products/api/v1/getAll","/products/api/v1/findById/1", "/products/api/v1/test"};
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests(authorize -> authorize

@@ -1,8 +1,8 @@
 package com.spickandspan.productservice.user.application.service;
 
-import com.spickandspan.productservice.user.infrastructure.config.KeycloakProperties;
 import com.spickandspan.productservice.user.domain.dto.req.CreateUserRequest;
 import lombok.RequiredArgsConstructor;
+import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -19,20 +19,20 @@ public class KeycloakUserService {
 
     @Value("${app.config.keycloak.realm}")
     private String realm;
-    private final KeycloakProperties keyCloakManager;
+    private final Keycloak keyCloakManager;
 
     private Integer createUser(UserRepresentation userRepresentation) {
-        return keyCloakManager.getInstance().realm(realm).users().create(userRepresentation).getStatus();
+        return keyCloakManager.realm(realm).users().create(userRepresentation).getStatus();
     }
 
     public void updateUser(UserRepresentation userRepresentation) {
-        keyCloakManager.getInstance().realm(realm).users().get(userRepresentation.getId()).update(userRepresentation);
+        keyCloakManager.realm(realm).users().get(userRepresentation.getId()).update(userRepresentation);
     }
 
 
     public List<UserRepresentation> readUserByEmail(String email) {
         try{
-            return keyCloakManager.getInstance().realm(realm).users().search(email).stream().toList();
+            return keyCloakManager.realm(realm).users().search(email).stream().toList();
         }catch (Exception exception){
             throw exception;
         }
@@ -41,7 +41,7 @@ public class KeycloakUserService {
 
     public UserRepresentation readUser(String authId) {
         try {
-            UserResource userResource = keyCloakManager.getInstance().realm(realm).users().get(authId);
+            UserResource userResource = keyCloakManager.realm(realm).users().get(authId);
             return userResource.toRepresentation();
         } catch (Exception e) {
             throw new EntityNotFoundException("User not found under given ID");

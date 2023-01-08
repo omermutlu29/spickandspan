@@ -1,6 +1,7 @@
 package com.spickandspan.taxservice.listener;
 
 import com.spickandspan.taxservice.event.ProductEvent;
+import com.spickandspan.taxservice.event.ProductTestEvent;
 import com.spickandspan.taxservice.service.TaxService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,19 @@ public class MyKafkaHandler {
     private TaxService taxService;
 
     @KafkaHandler
+    void test(String key, String value){
+        System.out.println(key);
+    }
+    @KafkaHandler
     void handleProductCreatedEvent(ProductEvent productCreatedEvent) {
-        taxService.handleEventService(productCreatedEvent);
+        System.out.println(productCreatedEvent);
+       // taxService.handleEventService(productCreatedEvent);
+    }
+
+    @KafkaHandler
+    void handleProductCreatedEvent(ProductTestEvent productTestEvent) {
+        System.out.println(productTestEvent);
+        // taxService.handleEventService(productCreatedEvent);
     }
 
 

@@ -2,6 +2,7 @@ package com.spickandspan.productservice.product.application.service;
 
 import com.spickandspan.productservice.common.exception.EntityNotFoundException;
 import com.spickandspan.productservice.common.exception.PermissionDeniedException;
+import com.spickandspan.productservice.product.application.event.Event;
 import com.spickandspan.productservice.product.application.event.EventType;
 import com.spickandspan.productservice.product.application.event.ProductEvent;
 import com.spickandspan.productservice.product.domain.dto.req.CreateProductRequest;
@@ -29,9 +30,9 @@ public class ProductService implements IProductService {
 
     private final ProductRepository productRepository;
     private final UserService userService;
-    private final KafkaTemplate<String, ProductEvent> kafkaTemplate;
+    private final KafkaTemplate<String, Event> kafkaTemplate;
 
-    public ProductService(ProductRepository productRepository, UserService userService, KafkaTemplate<String, ProductEvent> kafkaTemplate) {
+    public ProductService(ProductRepository productRepository, UserService userService, KafkaTemplate<String, Event> kafkaTemplate) {
         this.productRepository = productRepository;
         this.userService = userService;
         this.kafkaTemplate = kafkaTemplate;
